@@ -1,0 +1,43 @@
+{% extends 'base.html' %} 
+
+{% block title %}{{ title }}{% endblock title %} 
+
+{% block content %}
+<h1>Каталог книг</h1>
+<table class="table" id="library-catalog">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Наименование</th>
+      <th scope="col">Описание</th>
+      <th scope="col">Цена</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for book in books %}
+    <tr>
+      <th scope="row">
+        <a style="display: block" class="nav-link" href="{{ book.get_absolute_url }}">
+            {{forloop.counter}}
+        </a>
+      </th>
+      <td>
+        <a style="display: block" class="nav-link"  href="{{ book.get_absolute_url }}">
+          {{ book.title }}
+        </a>
+      </td>
+      <td>
+        <a style="display: block" class="nav-link"  href="{{ book.get_absolute_url }}">
+          {{ book.description }}
+        </a>
+      </td>
+      <td>
+        <a style="display: block" class="nav-link"  href="{{ book.get_absolute_url }}">
+          {{ book.price }}
+        </a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock content %}

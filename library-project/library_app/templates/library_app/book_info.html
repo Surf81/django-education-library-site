@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% load library_tags %}
+
+{% block title %}{{ title }}{% endblock title %}
+
+{% block content %}
+<h1>Информация о книге</h1>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Параметр</th>
+        <th scope="col">Значение</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for field in fields %}
+        <tr>
+            <th scope="row">{% get_verbose_field_name paginator.current_page field %}</th>
+            <td>{{ paginator.current_page|getattr:field }}</td>
+        </tr>    
+    {% endfor %}
+    </tbody>
+    </table>
+    {% if paginator.has_previous %}
+      <a class="btn btn-secondary" href="{{ paginator.previous_page.get_absolute_url }}">Предыдущая книга</a>
+    {% endif %}
+    {% if paginator.has_next %}
+      <a class="btn btn-secondary" href="{{ paginator.next_page.get_absolute_url }}">Следующая книга</a>
+    {% endif %}
+
+{% endblock content %}
+
+
+

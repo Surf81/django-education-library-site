@@ -1,0 +1,21 @@
+{% extends 'base.html' %} 
+
+{% block title %} Библиотека {% endblock title %} 
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <h1>Библиотека</h1>
+    <p>Добро пожаловать с библиотеку!</p>
+    <p>Для навигации воспользуйтесь меню сайта или следующими ссылками:</p>
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'book-list-view' %}">Каталог книг</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'library-info-view' %}">Информация</a>
+      </li>
+    </ul>
+  </div>
+</div>
+{% endblock content %}
