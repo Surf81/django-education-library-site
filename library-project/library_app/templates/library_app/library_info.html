@@ -9,3 +9,11 @@
   рублей
 </p>
 {% endblock content %}
+
+{% block script %}
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelector('#menu-library-info').classList.add("active")
+  }); 
+</script>
+{% endblock script %}

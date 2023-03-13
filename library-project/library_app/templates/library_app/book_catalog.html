@@ -41,3 +41,11 @@
   </tbody>
 </table>
 {% endblock content %}
+
+{% block script %}
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelector('#menu_book_list').classList.add("active")
+  }); 
+</script>
+{% endblock script %}
