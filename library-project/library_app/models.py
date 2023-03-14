@@ -35,7 +35,7 @@ class BookModel(models.Model):
         db_table = "book"
         verbose_name = "книга"
         verbose_name_plural = "книги"
-        get_latest_by = "publication_date"
+        get_latest_by = "title"
         ordering = ["title"]
 
     def save(self, *args, **kwargs):
@@ -43,8 +43,8 @@ class BookModel(models.Model):
             self.slug = slugify(self.title)
         super(BookModel, self).save(*args, **kwargs)
 
-    def get_absolute_url(self):
-        return reverse("book-info-view", kwargs={"slug": self.slug})
+    # def get_absolute_url(self):
+    #     return reverse("book-info-view", kwargs={"slug": self.slug})
 
     def __str__(self):
         return self.title

@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from django.db.models import Sum
+from django.db.models import Sum, Min
 
 from library_app.models import BookModel
 
@@ -43,6 +43,8 @@ class PaginatorBySlag:
 def book_info_view(request, slug=None):
     """Информация о книге"""
     book = get_object_or_404(BookModel, slug=slug)
+    # print(BookModel.objects.earliest())
+    # print(BookModel.objects.latest())
     # next_book = book.get_next_by_publication_date()
     # previous_book = book.get_previous_by_publication_date()
     paginator = PaginatorBySlag(BookModel.objects.all(), book)

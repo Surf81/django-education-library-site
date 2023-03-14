@@ -1,10 +1,16 @@
 {% extends 'base.html' %} 
 
+{% load static %}
+
+{% block link %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock link %}
+
 {% block title %}{{ title }}{% endblock title %} 
 
 {% block content %}
 <h1>Информация</h1>
-<p>
+<p class="shadow">
   Всего в библиотеке имеется {{ countbook }} книг на сумму {{ totalprice }}
   рублей
 </p>
