@@ -1,0 +1,27 @@
+{% extends 'base.html' %} 
+
+{% block title %} Добавить запись о книге {% endblock title %} 
+
+{% block content %}
+<h1>Новая запись о книге</h1>
+<form method="POST">
+  {% csrf_token %}
+  <table>
+    {{ form.as_table }}
+  </table>
+  <div class="my-2 btn-group">  
+  <input type="submit" class="btn btn-outline-primary" value="Добавить запись" />
+
+  {% if request.META.HTTP_REFERER %}
+  <input type="button" class="btn btn-outline-primary" 
+         value="Вернуться без изменения" 
+         onClick="window.location='{{ request.META.HTTP_REFERER }}'"/>
+  {% else %}
+  {% url 'book-list-view' as book_list_view %}
+  <input type="button" class="btn btn-outline-primary"
+         value="Вернуться без изменения" 
+         onClick="window.location='{{ book_list_view }}'"/>
+  {% endif %}
+  </div>
+</form>
+{% endblock content %}

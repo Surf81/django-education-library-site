@@ -1,0 +1,79 @@
+{% extends 'base.html' %} 
+
+{% load library_tags %}
+
+{% block title %}{{ title }}{% endblock title %} 
+
+{% block content %}
+<h1>Информация о книге</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Параметр</th>
+      <th scope="col">Значение</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for field in fields %}
+    <tr>
+      <th scope="row">
+        {% get_verbose_field_name paginator.current_page field %}
+      </th>
+      <td>{{ paginator.current_page|getattr:field }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<span class="nav-item dropdown">
+  <a
+    class="btn btn-primary dropdown-toggle"
+    href="#"
+    id="edit-book-button"
+    role="button"
+    data-bs-toggle="dropdown"
+    aria-expanded="false"
+  >
+    Редактировать запись
+  </a>
+  <div class="dropdown-menu" aria-labelledby="edit-book-button">
+    <a class="dropdown-item" href="{% url 'book-edit' book.slug %}"
+      >Через функцию-представления</a
+    >
+    <a class="dropdown-item" href="{% url 'book-classview-edit' book.slug %}"
+      >Через класс-представления</a
+    >
+  </div>
+</span>
+<span class="nav-item dropdown">
+  <a
+    class="btn btn-warning dropdown-toggle"
+    href="#"
+    id="edit-book-button"
+    role="button"
+    data-bs-toggle="dropdown"
+    aria-expanded="false"
+  >
+    Удалить запись
+  </a>
+  <div class="dropdown-menu" aria-labelledby="edit-book-button">
+    <a class="dropdown-item" href="{% url 'book-delete' book.slug %}"
+      >Через функцию-представления</a
+    >
+    <a class="dropdown-item" href="{% url 'book-classview-delete' book.slug %}"
+      >Через класс-представления</a
+    >
+  </div>
+</span>
+
+{% if paginator.has_previous %}
+<a
+  class="btn btn-secondary"
+  href="{{ paginator.previous_page.get_absolute_url }}"
+  >Предыдущая книга</a
+>
+{% endif %} {% if paginator.has_next %}
+<a class="btn btn-secondary" href="{{ paginator.next_page.get_absolute_url }}"
+  >Следующая книга</a
+>
+{% endif %} {% endblock content %}

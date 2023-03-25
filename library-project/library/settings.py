@@ -136,7 +136,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 ABSOLUTE_URL_OVERRIDES = {
-    'library_app.bookmodel': lambda rec: reverse("book-info-view", kwargs={"slug": rec.slug})
+    'library_app.bookmodel': lambda rec: reverse("book-detail-view", kwargs={"slug": rec.slug})
 }
 
 

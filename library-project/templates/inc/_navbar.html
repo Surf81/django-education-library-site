@@ -1,0 +1,30 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-primary bg-body-tertiary" data-bs-theme="dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'index-view' %}">Библиотека</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Переключатель навигации">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="menu_book_list" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Каталог
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="menu_book_list">
+            <li><a class="dropdown-item" href="{% url 'book-list-view' %}">Через функцию-представления</a></li>
+            <li><a class="dropdown-item" href="{% url 'book-classview' %}">Через класс-представления</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="menu-library-info" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Информация
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="menu-library-info">
+            <li><a class="dropdown-item" href="{% url 'library-info-view' %}">Через функцию-представления</a></li>
+            <li><a class="dropdown-item" href="{% url 'library-classview-info-view' %}">Через класс-представления</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

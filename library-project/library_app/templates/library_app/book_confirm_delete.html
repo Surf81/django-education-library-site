@@ -1,0 +1,30 @@
+{% extends 'base.html' %} 
+
+{% block title %} Подтверждение удаления {% endblock title %} 
+
+{% block content %}
+<h1>Удаление записи</h1>
+<form method="POST">
+  {% csrf_token %}
+  <p>Вы действительно хотите удалить запись о книге {{ object.title }}?</p>
+  <div class="my-2 btn-group">
+
+  <input type="submit" class="btn btn-outline-primary" value="Подтвердить" />
+  {% if request.META.HTTP_REFERER %}
+  <input
+    type="button"
+    class="btn btn-outline-primary"
+    value="Нет, я передумал"
+    onClick="window.location='{{ request.META.HTTP_REFERER }}'"
+  />
+  {% else %} {% url 'book-list-view' as book_list_view %}
+  <input
+    type="button"
+    class="btn btn-outline-primary"
+    value="Нет, я передумал"
+    onClick="window.location='{{ book_list_view }}'"
+  />
+  {% endif %}
+  </div>
+</form>
+{% endblock content %}

@@ -3,6 +3,10 @@
 {% block title %}{{ title }}{% endblock title %} 
 
 {% block content %}
+<div class="my-3 btn-group">
+  <a class="btn btn-outline-primary" href="{% url 'book-create' %}">Добавить книгу в каталог (через функцию-представление)</a>
+  <a class="btn btn-outline-primary" href="{% url 'book-classview-create' %}">Добавить книгу в каталог (через класс-представление)</a>
+</div>
 <h1>Каталог книг</h1>
 <table class="table" id="library-catalog">
   <thead>
@@ -11,6 +15,7 @@
       <th scope="col">Наименование</th>
       <th scope="col">Описание</th>
       <th scope="col">Цена</th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
@@ -18,7 +23,7 @@
     <tr>
       <th scope="row">
         <a style="display: block" class="nav-link" href="{{ book.get_absolute_url }}">
-            {{forloop.counter}}
+          {{ forloop.counter|add:start_page_number }}
         </a>
       </th>
       <td>
@@ -36,10 +41,62 @@
           {{ book.price }}
         </a>
       </td>
+      <td>
+        <span class="nav-item dropdown">
+          <a class="btn btn-success dropdown-toggle" href="#" id="view-book-button" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            View
+          </a>
+          <div class="dropdown-menu" aria-labelledby="view-book-button">
+            <a class="dropdown-item" href="{{ book.get_absolute_url }}">Через функцию-представления</a>
+            <a class="dropdown-item" href="{% url 'book-classview-detail' book.slug %}">Через класс-представления</a>
+          </div>
+        </span>
+        <span class="nav-item dropdown">
+          <a class="btn btn-primary dropdown-toggle" href="#" id="edit-book-button" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Edit
+          </a>
+          <div class="dropdown-menu" aria-labelledby="edit-book-button">
+            <a class="dropdown-item" href="{% url 'book-edit' book.slug %}">Через функцию-представления</a>
+            <a class="dropdown-item" href="{% url 'book-classview-edit' book.slug %}">Через класс-представления</a>
+          </div>
+        </span>
+        <span class="nav-item dropdown">
+          <a class="btn btn-warning dropdown-toggle" href="#" id="edit-book-button" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Del
+          </a>
+          <div class="dropdown-menu" aria-labelledby="edit-book-button">
+            <a class="dropdown-item" href="{% url 'book-delete' book.slug %}">Через функцию-представления</a>
+            <a class="dropdown-item" href="{% url 'book-classview-delete' book.slug %}">Через класс-представления</a>
+          </div>
+        </span>
+
+      </td>
     </tr>
     {% endfor %}
   </tbody>
 </table>
+{% if is_paginated and page_obj.has_other_pages %}
+<div class="my-2 btn-group">
+
+{% if page_obj.has_previous %}
+  <a class="btn btn-outline-primary" href="?page={{ page_obj.previous_page_number }}">&lt;&lt;</a>
+{% endif %}
+
+{% for page in paginator.page_range %}
+{% if page == page_obj.number %}
+<span class="btn btn-outline-primary active">{{ page_obj.number }}</span>
+{% else %}
+<a class="btn btn-outline-primary" href="?page={{ page }}">{{ page }}</a>
+{% endif %}
+{% endfor %}
+
+{% if page_obj.has_next %}
+  <a class="btn btn-outline-primary" href="?page={{ page_obj.next_page_number }}">&gt;&gt;</a>
+{% endif %}
+
+</div>
+
+{% endif %}
 {% endblock content %}
 
 {% block script %}
